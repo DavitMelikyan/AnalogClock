@@ -1,5 +1,5 @@
-#include "mainwindow.hpp"
-#include "analogclockwidget.hpp"
+#include "../include/mainwindow.hpp"
+#include "../include/analogclockwidget.hpp"
 
 
 MainWindow::MainWindow(QWidget *parent)

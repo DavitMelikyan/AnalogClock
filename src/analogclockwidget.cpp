@@ -1,4 +1,4 @@
-#include "analogclockwidget.hpp"
+#include "../include/analogclockwidget.hpp"
 
 AnalogClockWidget::AnalogClockWidget(QWidget *parent) : QWidget{parent} {
     timer = new QTimer(this);
