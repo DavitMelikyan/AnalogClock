@@ -11,27 +11,37 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    double s = qMin(width(), height()) / 200.0;
+    painter.setRenderHint(QPainter::TextAntialiasing);
+
     painter.translate(width() / 2, height() / 2);
+    double s = 0.45 * qMin(width(), height()) / 100.0;
     painter.scale(s, s);
 
     painter.setPen(Qt::NoPen);
     painter.setBrush("#000000");
-    painter.drawEllipse(QPoint(0, 0), 97, 97);
+    painter.drawEllipse(QPoint(0, 0), 100, 100);
     painter.setPen("#FFFFFF");
-    painter.drawEllipse(QPoint(0, 0), 97, 97);
+    painter.drawEllipse(QPoint(0, 0), 100, 100);
+
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush("#FFFFFF");
+    painter.drawEllipse(QPoint(0, 0), 4, 4);
 
     QFont font = painter.font();
     font.setBold(true);
     font.setPointSize(14);
     painter.setFont(font);
+    painter.setPen("#FFFFFF");
 
     for (int i = 1; i <= 12; ++i) {
         painter.save();
 
         painter.rotate(i * 30.0);
+        painter.drawLine(0, -90, 0, -97);
         painter.translate(0, -80);
         painter.rotate(-i * 30.0);
+
 
         QRect textRect(-15, -15, 30, 30);
         painter.drawText(textRect, Qt::AlignCenter, QString::number(i));
