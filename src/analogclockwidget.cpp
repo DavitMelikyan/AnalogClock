@@ -17,20 +17,20 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
     painter.scale(s, s);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush("#000000");
+    painter.setBrush(QColor(0, 0, 0));
     painter.drawEllipse(QPoint(0, 0), 100, 100);
-    painter.setPen("#FFFFFF");
+    painter.setPen(QColor(255, 255, 255));
     painter.drawEllipse(QPoint(0, 0), 100, 100);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush("#FFFFFF");
+    painter.setBrush(QColor(255, 255, 255));
     painter.drawEllipse(QPoint(0, 0), 4, 4);
 
     QFont font = painter.font();
     font.setBold(true);
     font.setPointSize(14);
     painter.setFont(font);
-    painter.setPen("#FFFFFF");
+    painter.setPen(QColor(255, 255, 255));
 
     for (int i = 1; i <= 12; ++i) {
         painter.save();
@@ -51,18 +51,18 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
 
     painter.save();
     painter.rotate((time.hour() % 12) * 30 + time.minute() * 0.5 + time.second() * (0.5 / 60.0));
-    painter.setPen(QPen(QColor("#EDEDED"), 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(QColor(237, 237, 237), 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.drawRect(-4, -50, 4, 50);
     painter.restore();
 
-    painter.setPen(QPen(QColor("#FFFFFF"), 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(QColor(255, 255, 255), 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.save();
     painter.rotate(time.minute() * 6.0 + time.second() * 0.1);
     painter.drawRect(-2, -70, 3, 70);
     painter.restore();
 
     painter.save();
-    painter.setPen(QPen(QColor("#F79316"), 2, Qt::SolidLine, Qt::RoundCap));
+    painter.setPen(QPen(QColor(247, 147, 22), 2, Qt::SolidLine, Qt::RoundCap));
     painter.rotate(6.0 * (time.second() + time.msec() / 1000.0));
     painter.drawLine(0, 0, 0, -90);
     painter.restore();
