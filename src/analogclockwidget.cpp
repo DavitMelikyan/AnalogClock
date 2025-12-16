@@ -38,7 +38,7 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
         painter.save();
 
         painter.rotate(i * 30.0);
-        painter.drawLine(0, -90, 0, -97);
+        painter.drawLine(0, -90, 0, -100);
         painter.translate(0, -80);
         painter.rotate(-i * 30.0);
 
