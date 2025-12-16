@@ -1,0 +1,56 @@
+Requirements
+
+Qt 5 or Qt 6
+qmake
+C++ compiler with C++17 support
+
+
+
+Build
+qmake AnalogWatch.pro
+make
+
+Run
+./AnalogWatch
+
+
+
+How the Clock Works
+
+The clock is drawn using QPainter.
+
+The painter is moved to the center of the widget and then scaled based on the window size.
+This keeps the clock centered and prevents clipping when resizing.
+
+A QTimer updates the widget regularly so the clock stays in sync with time.
+
+
+
+Angle Math Explanation
+
+Qt uses degrees for rotation and rotates clockwise.
+
+Hour Hand
+
+One hour = 30 degrees (360 / 12)
+Minutes and seconds slightly move the hour hand forward
+angle = hours * 30 + minutes * 0.5 + seconds * (0.5 / 60)
+
+Minute Hand
+
+One minute = 6 degrees (360 / 60)
+Seconds slightly move the minute hand
+angle = minutes * 6 + seconds * 0.1
+
+Second Hand
+
+One second = 6 degrees
+Milliseconds are added for smooth motion
+angle = 6 * (seconds + milliseconds / 1000)
+
+Rotation Convention
+
+The painter is first translated to the center of the widget
+The painter is rotated by the calculated angle
+The hand is then drawn pointing straight up (toward 12 o’clock)
+
