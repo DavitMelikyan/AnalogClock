@@ -52,15 +52,15 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
     const QTime time = QTime::currentTime();
 
     painter.save();
-    painter.rotate(30.0 * (time.hour() % 12 + time.minute() / 60.0));
+    painter.rotate((time.hour() % 12) * 30 + time.minute() * 0.5 + time.second() * (0.5 / 60.0));
     painter.setPen(Qt::NoPen);
     painter.setBrush("#EDEDED");
-    painter.drawRect(-4, -50, 4, 50);
+    painter.drawRect(-4, -50, 6, 50);
     painter.restore();
 
     painter.setBrush("#FFFCFC");
     painter.save();
-    painter.rotate(6.0 * (time.minute() + time.second() / 60.0));
+    painter.rotate(time.minute() * 6.0 + time.second() * 0.1);
     painter.drawRect(-2, -70, 4, 70);
     painter.restore();
 
