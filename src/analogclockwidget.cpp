@@ -10,8 +10,7 @@ AnalogClockWidget::AnalogClockWidget(QWidget *parent) : QWidget{parent} {
 void AnalogClockWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::TextAntialiasing);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
     painter.translate(width() / 2, height() / 2);
     double s = 0.45 * qMin(width(), height()) / 100.0;
@@ -22,7 +21,6 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
     painter.drawEllipse(QPoint(0, 0), 100, 100);
     painter.setPen("#FFFFFF");
     painter.drawEllipse(QPoint(0, 0), 100, 100);
-
 
     painter.setPen(Qt::NoPen);
     painter.setBrush("#FFFFFF");
@@ -53,20 +51,19 @@ void AnalogClockWidget::paintEvent(QPaintEvent*)
 
     painter.save();
     painter.rotate((time.hour() % 12) * 30 + time.minute() * 0.5 + time.second() * (0.5 / 60.0));
-    painter.setPen(Qt::NoPen);
-    painter.setBrush("#EDEDED");
-    painter.drawRect(-4, -50, 6, 50);
+    painter.setPen(QPen(QColor("#EDEDED"), 6, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.drawRect(-4, -50, 4, 50);
     painter.restore();
 
-    painter.setBrush("#FFFCFC");
+    painter.setPen(QPen(QColor("#FFFFFF"), 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.save();
     painter.rotate(time.minute() * 6.0 + time.second() * 0.1);
-    painter.drawRect(-2, -70, 4, 70);
+    painter.drawRect(-2, -70, 3, 70);
     painter.restore();
 
     painter.save();
-    painter.setPen("#F79316");
-    painter.rotate(6.0 * time.second());
+    painter.setPen(QPen(QColor("#F79316"), 2, Qt::SolidLine, Qt::RoundCap));
+    painter.rotate(6.0 * (time.second() + time.msec() / 1000.0));
     painter.drawLine(0, 0, 0, -90);
     painter.restore();
 }
